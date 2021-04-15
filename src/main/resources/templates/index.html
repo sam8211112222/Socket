@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Test</h1>
+<form method="get" action="/connect">
+<div style="margin-bottom:15px">
+    <button style="margin-right:50px;display:inline;">主機連線</button>
+    <p style='display: inline;'>Address: <input type="text" name="address"></p>
+    <p style='display: inline;'>port: <input type="text" name="port"></p>
+</div>
+</form>
+<div style="margin-bottom:15px">
+    <p>連線狀態 : <span id="status" th:text="${session.status}"></span></p>
+</td></div>
+<div>
+</div>
+<form method="get" action="transaction">
+<div style="margin-bottom:15px">
+    <p style='display: inline;'>交易代碼 :</p>
+    <input type="submit" name="transaction" value="BPFN">
+    <input type="submit" name="transaction" value="BPFK">
+    <input type="submit" name="transaction" value="BPBK">
+    <input type="submit" name="transaction" value="BPFC">
+    <input type="submit" name="transaction" value="IQCG">
+    <p>交易模式 : </p><span th:text="${session.transaction}"></span>
+</div>
+</form>
+<form method="get" action="send">
+<div style="margin-bottom:15px">
+    <p style='display: inline;'>輸入 : </p><input name="io" type="text" maxlength="20"><button style="margin-left:10px"  id="send">send</button><p th:text="${fault}" style='display: inline;'></p><br>
+    <p>顯示 : </p><textarea id="display" style="width:500px;height:150px;" readonly th:text="${display}"></textarea>
+</div>
+</form>
+<form method="get" action="/close">
+<button name="close">關閉連線</button>
+</form>
+</body>
+</html>
