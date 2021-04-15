@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
@@ -26,7 +23,7 @@ public class SocketController extends HttpServlet {
         session.setAttribute("status",null);
         return "index";
     }
-    @GetMapping("/connect")
+    @PostMapping("/connect")
     public String connect(@RequestParam(value = "address",required = false)String address,
                           @RequestParam(value = "port",required = false)int port,
                           Model model,HttpSession session) throws UnknownHostException {
@@ -34,13 +31,13 @@ public class SocketController extends HttpServlet {
         return "index";
     }
 
-    @GetMapping("/close")
+    @PostMapping("/close")
     public String close(Model model,HttpSession session) throws IOException {
         socketService.close(session);
         return "index";
     }
 
-    @GetMapping("/send")
+    @PostMapping("/send")
     public String send(@RequestParam(value = "io",required = false)String io ,Model model,HttpSession session) throws IOException {
         if(session.getAttribute("status")!=null) {
                 model.addAttribute("display",socketService.send(io));
@@ -49,12 +46,14 @@ public class SocketController extends HttpServlet {
             }
         return "index";
     }
-    @GetMapping("/transaction")
+    @PostMapping("/transaction")
     public String transaction(@RequestParam(value = "transaction",required = false)String transaction ,Model model,HttpSession session) throws IOException {
         if(session.getAttribute("status")!=null) {
             session.setAttribute("transaction", transaction);
             socketService.transaction(transaction);
             System.out.println(transaction);
+        }else{
+            model.addAttribute("fault","  請先連線");
         }
         return "index";
     }

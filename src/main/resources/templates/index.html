@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 </head>
 <body>
 <h1>Test</h1>
-<form method="get" action="/connect">
+<form method="post" action="/connect">
 <div style="margin-bottom:15px">
     <button style="margin-right:50px;display:inline;">主機連線</button>
     <p style='display: inline;'>Address: <input type="text" name="address"></p>
@@ -18,7 +20,7 @@
 </td></div>
 <div>
 </div>
-<form method="get" action="transaction">
+<form method="post" action="transaction">
 <div style="margin-bottom:15px">
     <p style='display: inline;'>交易代碼 :</p>
     <input type="submit" name="transaction" value="BPFN">
@@ -26,17 +28,37 @@
     <input type="submit" name="transaction" value="BPBK">
     <input type="submit" name="transaction" value="BPFC">
     <input type="submit" name="transaction" value="IQCG">
-    <p>交易模式 : </p><span th:text="${session.transaction}"></span>
+    <p>交易模式 : <span id="tt" th:text="${session.transaction}"></span></p>
 </div>
 </form>
-<form method="get" action="send">
+<form method="post" action="send" id="forms">
 <div style="margin-bottom:15px">
-    <p style='display: inline;'>輸入 : </p><input name="io" type="text" maxlength="20"><button style="margin-left:10px"  id="send">send</button><p th:text="${fault}" style='display: inline;'></p><br>
-    <p>顯示 : </p><textarea id="display" style="width:500px;height:150px;" readonly th:text="${display}"></textarea>
+    <p style='display: inline;'>輸入 : </p><input id="io" name="io" type="text" maxlength="20" disabled="true"><input type="button" style="margin-left:10px" id="send" value="送出"><p th:text="${fault}" style='display: inline;'></p><br>
+    <p>顯示 : </p><textarea id="display" style="width:1000px;height:150px;" readonly th:text="${display}"></textarea>
 </div>
 </form>
-<form method="get" action="/close">
+<form method="post" action="/close">
 <button name="close">關閉連線</button>
 </form>
 </body>
+<script>
+var tt= $("#tt").text();
+var status=$("#status").text();
+$("#send").click(function(){
+if(status==""){
+$("#forms").submit();
+}else if(tt!=""){
+$("#forms").submit();
+}else{
+alert("請先選擇交易代碼");
+}
+})
+
+window.onload=function(){
+if(tt!=""){
+console.log("abc");
+$("#io").attr("disabled",false);
+}
+}
+</script>
 </html>
