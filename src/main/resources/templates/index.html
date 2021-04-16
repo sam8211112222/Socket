@@ -8,9 +8,9 @@
 </head>
 <body>
 <h1>Test</h1>
-<form method="post" action="/connect">
+<form method="post" action="/connect" id="formcon">
     <div style="margin-bottom:15px">
-        <button style="margin-right:50px;display:inline;">主機連線</button>
+        <input type="button" id="connect" style="margin-right:50px;display:inline;" value="主機連線">
         <p style='display: inline;'>Address: <input type="text" name="address"></p>
         <p style='display: inline;'>port: <input type="text" name="port"></p>
     </div>
@@ -55,12 +55,23 @@
             alert("請先選擇交易代碼");
         }
     })
-
+    $("#connect").click(function(){
+        if(status==""){
+            $("#formcon").submit();
+        }else{
+            alert("已連線中");
+        }
+    })
     window.onload = function () {
         if (tt != "") {
             console.log("abc");
             $("#io").attr("disabled", false);
         }
     }
+
+
+
+
+
 </script>
 </html>
