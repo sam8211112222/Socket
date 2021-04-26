@@ -52,9 +52,14 @@ public class SocketController extends HttpServlet {
     @PostMapping("/transaction")
     public String transaction(@RequestParam(value = "transaction", required = false) String transaction, Model model, HttpSession session) throws IOException {
         if (session.getAttribute("status") != null) {
-            session.setAttribute("transaction", transaction);
-            socketService.transaction(transaction);
-            System.out.println(transaction);
+            if(!transaction.equals("BD")) {
+                session.setAttribute("transaction", transaction);
+                socketService.transaction(transaction);
+                System.out.println(transaction);
+            }else if(transaction.equals("BD")){
+                session.setAttribute("transaction","");
+                socketService.transaction(transaction);
+            }
         } else {
             model.addAttribute("fault", "  請先連線");
         }
