@@ -33,7 +33,7 @@
 </form>
 <form method="post" action="send" id="forms">
     <div style="margin-bottom:15px">
-        <p style='display: inline;'>輸入 : </p><input id="io" name="io" type="text" maxlength="20" disabled="true"><input
+        <p style='display: inline;'>輸入 : </p><input id="io" name="io" type="text" disabled="true"><input
             type="button" style="margin-left:10px" id="send" value="送出">
         <p th:text="${fault}" style='display: inline;'></p><br>
         <p>顯示 : </p><textarea id="display" style="width:1000px;height:150px;" readonly th:text="${display}"></textarea>

@@ -22,6 +22,7 @@ public class SocketService extends HttpServlet {
     BufferedReader s_in;
     PrintWriter s_out;
 
+    //與server連線
     public void connect(String address, int port, HttpSession session) throws UnknownHostException {
         String data;
         BufferedReader key_in = new BufferedReader(new InputStreamReader(System.in));
@@ -41,7 +42,7 @@ public class SocketService extends HttpServlet {
             System.out.println("無法連接主機...");
         }
     }
-
+    //關閉連線
     public void close(HttpSession session) throws IOException {
         if (session.getAttribute("status") != null) {
             socket.close();
@@ -50,7 +51,7 @@ public class SocketService extends HttpServlet {
             System.out.println("關閉連線");
         }
     }
-
+    //送出String
     public String send(String a) throws IOException {
         s_in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         s_out = new PrintWriter(socket.getOutputStream());
@@ -58,11 +59,10 @@ public class SocketService extends HttpServlet {
         s_out.flush();
         return s_in.readLine();
     }
-
+    //送出交易代碼
     public void transaction(String type) throws IOException {
         s_out = new PrintWriter(socket.getOutputStream());
         s_out.println(type);
         s_out.flush();
     }
-
 }
