@@ -1,6 +1,8 @@
 package com.example.socket.controller;
 
 import com.example.socket.service.SocketService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import java.util.Map;
 public class SocketController extends HttpServlet {
     @Autowired
     SocketService socketService;
+
+    private static final Logger logger = LoggerFactory.getLogger(SocketController.class);
 
     @GetMapping("/")
     public String index(HttpSession session) {
@@ -42,7 +46,9 @@ public class SocketController extends HttpServlet {
     @PostMapping("/send")
     public String send(@RequestParam(value = "io", required = false) String io, Model model, HttpSession session) throws IOException {
         if (session.getAttribute("status") != null) {
+            logger.info("傳送: "+io);
             model.addAttribute("display", socketService.send(io));
+            logger.info("接收: "+socketService.send(io));
         } else {
             model.addAttribute("fault", "  請先連線");
         }
@@ -59,6 +65,7 @@ public class SocketController extends HttpServlet {
             }else if(transaction.equals("BD")){
                 session.setAttribute("transaction","");
                 socketService.transaction(transaction);
+                logger.info("關閉交易代碼");
             }
         } else {
             model.addAttribute("fault", "  請先連線");

@@ -58,9 +58,7 @@ public class SocketService extends HttpServlet {
         s_in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         s_out = new PrintWriter(socket.getOutputStream());
         s_out.println(a);
-//        logger.info("傳送字串: "+a);
         s_out.flush();
-//        logger.info("接收資料: "+s_in.readLine());
         return s_in.readLine();
     }
     //送出交易代碼
