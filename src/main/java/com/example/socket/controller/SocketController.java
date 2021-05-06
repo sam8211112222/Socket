@@ -32,10 +32,8 @@ public class SocketController extends HttpServlet {
     }
 
     @PostMapping("/connect")
-    public String connect(@RequestParam(value = "address", required = false) String address,
-                          @RequestParam(value = "port", required = false) int port,
-                          Model model, HttpSession session) throws UnknownHostException {
-        minaSocket.connect(address, port, session);
+    public String connect(Model model, HttpSession session) throws UnknownHostException {
+        minaSocket.connect(session);
         return "index";
     }
 
@@ -49,8 +47,9 @@ public class SocketController extends HttpServlet {
     public String send(@RequestParam(value = "io", required = false) String io, Model model, HttpSession session) throws Exception {
         if (session.getAttribute("status") != null && !io.isEmpty()) {
             logger.info("傳送: "+io);
-            session.setAttribute("display", minaSocket.send(io,session));
-            logger.info("接收: "+minaSocket.send(io,session));
+            String recevied=minaSocket.send(io,session);
+            session.setAttribute("display", recevied);
+            logger.info("接收: "+recevied);
         }else if(io.isEmpty()) {
             model.addAttribute("fault", "  請輸入資料");
         }else{

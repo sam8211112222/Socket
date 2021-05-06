@@ -29,13 +29,13 @@ public class MinaSocket extends IoHandlerAdapter {
     private static final Logger logger = Logger.getLogger(SocketService.class);
 
     //與server連線
-    public void connect(String address, int port, HttpSession session) throws UnknownHostException {
+    public void connect(HttpSession session) throws UnknownHostException {
         try {
             //新增一個連線
             connector = new NioSocketConnector();
             connector.setHandler(this);
             //連線IP跟port
-            ConnectFuture connFuture = connector.connect(new InetSocketAddress(address, port));
+            ConnectFuture connFuture = connector.connect(new InetSocketAddress("10.97.19.81", 3001));
             //斷線後不報錯
             connFuture.awaitUninterruptibly();
             iosession = connFuture.getSession();

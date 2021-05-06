@@ -18,14 +18,14 @@ public class SocketService extends HttpServlet {
     PrintWriter s_out;
     private static final Logger logger = Logger.getLogger(SocketService.class);
     //與server連線
-    public void connect(String address, int port, HttpSession session) throws UnknownHostException {
+    public void connect(HttpSession session) throws UnknownHostException {
         String data;
         BufferedReader key_in = new BufferedReader(new InputStreamReader(System.in));
         InetAddress iNetAddress = InetAddress.getLocalHost();
         String hostname = iNetAddress.getHostName();
         try {
             // 呼叫此建構子的同時,即根據參數的IP與PORT去連接ServerSocket
-            socket = new Socket(address, port);
+            socket = new Socket("10.97.19.81", 3001);
             open = true;
             if (open) {
                 session.setAttribute("status", "連線中");
