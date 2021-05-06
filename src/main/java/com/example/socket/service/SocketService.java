@@ -1,15 +1,11 @@
 package com.example.socket.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -20,7 +16,7 @@ public class SocketService extends HttpServlet {
     Socket socket;
     BufferedReader s_in;
     PrintWriter s_out;
-    private static final Logger logger = LoggerFactory.getLogger(SocketService.class);
+    private static final Logger logger = Logger.getLogger(SocketService.class);
     //與server連線
     public void connect(String address, int port, HttpSession session) throws UnknownHostException {
         String data;
@@ -55,6 +51,7 @@ public class SocketService extends HttpServlet {
     }
     //送出String
     public String send(String a) throws IOException {
+//        s_in = new DataInputStream(socket.getInputStream());
         s_in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         s_out = new PrintWriter(socket.getOutputStream());
         s_out.println(a);
