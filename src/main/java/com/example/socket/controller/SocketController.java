@@ -47,11 +47,13 @@ public class SocketController extends HttpServlet {
 
     @PostMapping("/send")
     public String send(@RequestParam(value = "io", required = false) String io, Model model, HttpSession session) throws Exception {
-        if (session.getAttribute("status") != null) {
+        if (session.getAttribute("status") != null && !io.isEmpty()) {
             logger.info("傳送: "+io);
-            model.addAttribute("display", minaSocket.send(io));
-            logger.info("接收: "+minaSocket.send(io));
-        } else {
+            session.setAttribute("display", minaSocket.send(io,session));
+            logger.info("接收: "+minaSocket.send(io,session));
+        }else if(io.isEmpty()) {
+            model.addAttribute("fault", "  請輸入資料");
+        }else{
             model.addAttribute("fault", "  請先連線");
         }
         return "index";
@@ -60,15 +62,9 @@ public class SocketController extends HttpServlet {
     @PostMapping("/transaction")
     public String transaction(@RequestParam(value = "transaction", required = false) String transaction, Model model, HttpSession session) throws Exception {
         if (session.getAttribute("status") != null) {
-            if(!transaction.equals("BD")) {
                 session.setAttribute("transaction", transaction);
                 minaSocket.transaction(transaction);
                 logger.info("交易代碼 : "+transaction);
-            }else if(transaction.equals("BD")){
-                session.setAttribute("transaction","");
-                minaSocket.transaction(transaction);
-                logger.info("關閉交易代碼");
-            }
         } else {
             model.addAttribute("fault", "  請先連線");
         }

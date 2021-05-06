@@ -7,7 +7,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 </head>
 <body>
-<h1>Test</h1>
+<h1>MinaSocket</h1>
 <form method="post" action="/connect" id="formcon">
     <div style="margin-bottom:15px">
         <input type="button" id="connect" style="margin-right:50px;display:inline;" value="主機連線">
@@ -28,7 +28,6 @@
         <input type="submit" name="transaction" value="BPBK">
         <input type="submit" name="transaction" value="BPFC">
         <input type="submit" name="transaction" value="IQCG">
-        <input type="submit" name="transaction" value="BD">
         <p>交易模式 : <span id="tt" th:text="${session.transaction}"></span></p>
     </div>
 </form>
@@ -37,7 +36,7 @@
         <p style='display: inline;'>輸入 : </p><input id="io" name="io" type="text" disabled="true"><input
             type="button" style="margin-left:10px" id="send" value="送出">
         <p th:text="${fault}" style='display: inline;'></p><br>
-        <p>顯示 : </p><textarea id="display" style="width:1000px;height:150px;" readonly th:text="${display}"></textarea>
+        <p>顯示 : </p><textarea id="display" style="width:1000px;height:150px;" readonly th:text="${session.display}"></textarea>
     </div>
 </form>
 <form method="post" action="/close">
