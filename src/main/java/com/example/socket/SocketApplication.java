@@ -1,6 +1,5 @@
 package com.example.socket;
 
-import com.example.socket.service.SocketService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

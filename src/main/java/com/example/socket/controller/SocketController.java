@@ -1,11 +1,9 @@
 package com.example.socket.controller;
 
 import com.example.socket.service.MinaSocket;
-import com.example.socket.service.SocketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Map;
 
 
 @Controller
 public class SocketController extends HttpServlet {
-    @Autowired
-    SocketService socketService;
+
     @Autowired
     MinaSocket minaSocket;
     private static final Logger logger = LoggerFactory.getLogger(SocketController.class);

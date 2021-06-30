@@ -26,7 +26,7 @@ public class MinaSocket extends IoHandlerAdapter {
     private IoConnector connector;
     private static IoSession iosession;
     private String turn = null;
-    private static final Logger logger = Logger.getLogger(SocketService.class);
+    private static final Logger logger = Logger.getLogger(MinaSocket.class);
 
     //與server連線
     public void connect(HttpSession session) throws UnknownHostException {
@@ -41,7 +41,6 @@ public class MinaSocket extends IoHandlerAdapter {
             iosession = connFuture.getSession();
             session.setAttribute("status", "連線中");
             logger.info("連線成功");
-            System.out.println("連線成功");
         } catch (Exception e) {
             session.setAttribute("status", "無法連線到主機");
             logger.info("連線主機失敗");
@@ -84,7 +83,7 @@ public class MinaSocket extends IoHandlerAdapter {
             throws Exception {
         IoBuffer bbuf = (IoBuffer) message;
         turn = new String(bbuf.array(), StandardCharsets.UTF_8);
-        System.out.println("客户端收到消息" + turn);
+        logger.info("客户端收到消息" + turn);
     }
 
     @Override
