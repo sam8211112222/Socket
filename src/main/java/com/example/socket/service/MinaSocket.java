@@ -11,6 +11,8 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletOutputStream;
@@ -22,12 +24,17 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 @Service
+@Component
 public class MinaSocket extends IoHandlerAdapter {
     private IoConnector connector;
     private static IoSession iosession;
     private String turn = null;
     private static final Logger logger = Logger.getLogger(MinaSocket.class);
 
+    @Value("${test.ip}")
+    private String ip;
+    @Value("${test.port}")
+    private String port;
     //與server連線
     public void connect(HttpSession session) throws UnknownHostException {
         try {
@@ -35,7 +42,10 @@ public class MinaSocket extends IoHandlerAdapter {
             connector = new NioSocketConnector();
             connector.setHandler(this);
             //連線IP跟port
-            ConnectFuture connFuture = connector.connect(new InetSocketAddress("10.97.19.81", 3001));
+            logger.info(ip);
+            logger.info(Integer.parseInt(port));
+            Integer.parseInt(port);
+            ConnectFuture connFuture = connector.connect(new InetSocketAddress(ip, Integer.parseInt(port)));
             //斷線後不報錯
             connFuture.awaitUninterruptibly();
             iosession = connFuture.getSession();
@@ -44,6 +54,7 @@ public class MinaSocket extends IoHandlerAdapter {
         } catch (Exception e) {
             session.setAttribute("status", "無法連線到主機");
             logger.info("連線主機失敗");
+            logger.error(e);
         }
     }
 
