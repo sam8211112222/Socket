@@ -22,39 +22,60 @@ import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.Properties;
 
 @Service
-@Component
 public class MinaSocket extends IoHandlerAdapter {
     private IoConnector connector;
     private static IoSession iosession;
     private String turn = null;
     private static final Logger logger = Logger.getLogger(MinaSocket.class);
 
-    @Value("${test.ip}")
-    private String ip;
-    @Value("${test.port}")
-    private String port;
     //與server連線
     public void connect(HttpSession session) throws UnknownHostException {
-        try {
-            //新增一個連線
-            connector = new NioSocketConnector();
-            connector.setHandler(this);
-            //連線IP跟port
-            logger.info(ip);
-            logger.info(Integer.parseInt(port));
-            Integer.parseInt(port);
-            ConnectFuture connFuture = connector.connect(new InetSocketAddress(ip, Integer.parseInt(port)));
-            //斷線後不報錯
-            connFuture.awaitUninterruptibly();
-            iosession = connFuture.getSession();
-            session.setAttribute("status", "連線中");
-            logger.info("連線成功");
-        } catch (Exception e) {
-            session.setAttribute("status", "無法連線到主機");
-            logger.info("連線主機失敗");
-            logger.error(e);
+        Properties prop = new Properties();
+        FileInputStream fis = null;
+
+        {
+            try {
+                fis = new FileInputStream("C:\\config.properties");
+                logger.info("讀取config.properties成功");
+                prop.load(fis);
+                String ip = prop.getProperty("ip");
+                int port = Integer.parseInt(prop.getProperty("port"));
+                try {
+                    //新增一個連線
+                    connector = new NioSocketConnector();
+                    connector.setHandler(this);
+                    //連線IP跟port
+                    logger.info(ip);
+                    logger.info(port);
+                    ConnectFuture connFuture = connector.connect(new InetSocketAddress(ip,port));
+                    //斷線後不報錯
+                    connFuture.awaitUninterruptibly();
+                    iosession = connFuture.getSession();
+                    session.setAttribute("status", "連線中");
+                    logger.info("連線成功");
+                } catch (Exception e) {
+                    session.setAttribute("status", "無法連線到主機");
+                    logger.info("連線主機失敗");
+                    logger.error(e);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                logger.info("找不到config.properties檔");
+                logger.error(e);
+            } finally {
+                try {
+                    assert fis != null;
+                    fis.close();
+                    logger.info("FileInputStream已關閉");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.info("FileInputStream為Null");
+                }
+            }
         }
     }
 
