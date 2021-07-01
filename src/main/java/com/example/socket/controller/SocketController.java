@@ -42,14 +42,14 @@ public class SocketController extends HttpServlet {
     @PostMapping("/send")
     public String send(@RequestParam(value = "io", required = false) String io, Model model, HttpSession session) throws Exception {
         if (session.getAttribute("status") != null && !io.isEmpty()) {
-            logger.info("傳送: "+io);
+            logger.info("send: "+io);
             String recevied=minaSocket.send(io,session);
             session.setAttribute("display", recevied);
-            logger.info("接收: "+recevied);
+            logger.info("received: "+recevied);
         }else if(io.isEmpty()) {
-            model.addAttribute("fault", "  請輸入資料");
+            model.addAttribute("fault", "  Please input content");
         }else{
-            model.addAttribute("fault", "  請先連線");
+            model.addAttribute("fault", "  Please connect first");
         }
         return "index";
     }

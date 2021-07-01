@@ -40,7 +40,7 @@ public class MinaSocket extends IoHandlerAdapter {
         {
             try {
                 fis = new FileInputStream("C:\\config.properties");
-                logger.info("讀取config.properties成功");
+                logger.info("Load config.properties successfully");
                 prop.load(fis);
                 String ip = prop.getProperty("ip");
                 int port = Integer.parseInt(prop.getProperty("port"));
@@ -55,25 +55,25 @@ public class MinaSocket extends IoHandlerAdapter {
                     //斷線後不報錯
                     connFuture.awaitUninterruptibly();
                     iosession = connFuture.getSession();
-                    session.setAttribute("status", "連線中");
-                    logger.info("連線成功");
+                    session.setAttribute("status", "Successful");
+                    logger.info("Connect successfully");
                 } catch (Exception e) {
-                    session.setAttribute("status", "無法連線到主機");
-                    logger.info("連線主機失敗");
+                    session.setAttribute("status", "Fail to connect server");
+                    logger.info("Fail to connect server");
                     logger.error(e);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                logger.info("找不到config.properties檔");
+                logger.info("Can't find config.properties");
                 logger.error(e);
             } finally {
                 try {
                     assert fis != null;
                     fis.close();
-                    logger.info("FileInputStream已關閉");
+                    logger.info("FileInputStream is closed");
                 } catch (IOException e) {
                     e.printStackTrace();
-                    logger.info("FileInputStream為Null");
+                    logger.info("FileInputStream is null");
                 }
             }
         }
@@ -86,7 +86,7 @@ public class MinaSocket extends IoHandlerAdapter {
             session.setAttribute("status", null);
             session.setAttribute("display",null);
             connector.dispose(true);
-            logger.info("關閉連線");
+            logger.info("Close connection");
         }
     }
 
@@ -107,7 +107,7 @@ public class MinaSocket extends IoHandlerAdapter {
         //先將string轉成byte利用IoBuffer傳送
         iosession.write(IoBuffer.wrap(type.getBytes(StandardCharsets.UTF_8)));
         Thread.sleep(1000);
-        logger.info("交易代碼: " + type);
+        logger.info("type: " + type);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class MinaSocket extends IoHandlerAdapter {
             throws Exception {
         IoBuffer bbuf = (IoBuffer) message;
         turn = new String(bbuf.array(), StandardCharsets.UTF_8);
-        logger.info("客户端收到消息" + turn);
+        logger.info("Received message" + turn);
     }
 
     @Override

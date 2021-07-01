@@ -3,42 +3,44 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>MinaSocket</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h1>MinaSocket</h1>
 <form method="post" action="/connect" id="formcon">
     <div style="margin-bottom:15px">
-        <input type="button" id="connect" style="margin-right:50px;display:inline;" value="主機連線">
+        <input type="button" id="connect" style="margin-right:50px;display:inline;" value="Connect to server">
     </div>
 </form>
 <div style="margin-bottom:15px">
-    <p>連線狀態 : <span id="status" th:text="${session.status}"></span></p>
-    </td></div>
+    <p>Connection status : <span id="status" style="color: red" th:text="${session.status}"></span></p>
+    </div>
 <div>
 </div>
 <form method="post" action="transaction">
     <div style="margin-bottom:15px">
-        <p style='display: inline;'>交易代碼 :</p>
+        <p style='display: inline;'>Choose a transaction type :</p>
         <input type="submit" name="transaction" value="BPFN">
         <input type="submit" name="transaction" value="BPFK">
         <input type="submit" name="transaction" value="BPBK">
         <input type="submit" name="transaction" value="BPDC">
         <input type="submit" name="transaction" value="IQCG">
-        <p>交易模式 : <span id="tt" th:text="${session.transaction}"></span></p>
+        <p>Transaction type : <span id="tt" style="color: red" th:text="${session.transaction}"></span></p>
     </div>
 </form>
 <form method="post" action="send" id="forms">
     <div style="margin-bottom:15px">
-        <p style='display: inline;'>輸入 : </p><input id="io" name="io" type="text" disabled="true"><input
+        <p style='display: inline;'>Input content : </p><input id="io" name="io" type="text" disabled="true"><input
             type="button" style="margin-left:10px" id="send" value="送出">
         <p th:text="${fault}" style='display: inline;'></p><br>
-        <p>顯示 : </p><textarea id="display" style="width:1000px;height:150px;" readonly th:text="${session.display}"></textarea>
+        <p>Received message : </p><textarea id="display" style="width:1000px;height:150px;" readonly th:text="${session.display}"></textarea>
     </div>
 </form>
 <form method="post" action="/close">
-    <button name="close">關閉連線</button>
+    <button name="close">Close connection</button>
 </form>
 </body>
 <script>
