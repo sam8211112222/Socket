@@ -1,26 +1,26 @@
 Manifest-Version: 1.0
 Main-Class: com.example.socket.SocketApplication
-Class-Path: spring-ws-core-3.0.10.RELEASE.jar jackson-datatype-jsr310-2.
- 11.4.jar spring-aop-5.3.5.jar spring-expression-5.3.5.jar jakarta.el-3.
- 0.3.jar jakarta.xml.bind-api-2.3.3.jar spring-websocket-5.3.5.jar tomca
- t-embed-core-9.0.44.jar jakarta.xml.ws-api-2.3.3.jar thymeleaf-extras-j
- ava8time-3.0.4.RELEASE.jar spring-boot-starter-web-services-2.4.4.jar t
- omcat-embed-websocket-9.0.44.jar jakarta.activation-1.2.2.jar jackson-m
- odule-parameter-names-2.11.4.jar attoparser-2.0.5.RELEASE.jar mina-core
- -2.0.14.jar log4j-1.2.17.jar spring-boot-starter-web-2.4.4.jar snakeyam
- l-1.27.jar stax-ex-1.8.3.jar jackson-annotations-2.11.4.jar spring-boot
- -starter-thymeleaf-2.4.4.jar slf4j-api-1.7.30.jar jquery-3.5.1.jar jaka
- rta.xml.soap-api-1.4.2.jar spring-boot-starter-json-2.4.4.jar jackson-c
- ore-2.11.4.jar jakarta.activation-api-1.2.2.jar spring-boot-autoconfigu
- re-2.4.4.jar saaj-impl-1.5.2.jar log4j-api-2.13.3.jar jackson-datatype-
- jdk8-2.11.4.jar logback-core-1.2.3.jar spring-boot-starter-tomcat-2.4.4
- .jar spring-beans-5.3.5.jar spring-boot-starter-websocket-2.4.4.jar spr
- ing-boot-starter-2.4.4.jar jul-to-slf4j-1.7.30.jar spring-oxm-5.3.5.jar
-  thymeleaf-spring5-3.0.12.RELEASE.jar spring-jcl-5.3.5.jar spring-core-
- 5.3.5.jar unbescape-1.1.6.RELEASE.jar jackson-databind-2.11.4.jar sprin
- g-webmvc-5.3.5.jar jakarta.annotation-api-1.3.5.jar spring-web-5.3.5.ja
- r log4j-to-slf4j-2.13.3.jar spring-messaging-5.3.5.jar spring-boot-2.4.
- 4.jar spring-xml-3.0.10.RELEASE.jar spring-boot-devtools-2.4.4.jar jaka
- rta.jws-api-2.1.0.jar logback-classic-1.2.3.jar spring-context-5.3.5.ja
- r spring-boot-starter-logging-2.4.4.jar thymeleaf-3.0.12.RELEASE.jar
+Class-Path: jakarta.xml.bind-api-2.3.3.jar thymeleaf-spring5-3.0.12.RELE
+ ASE.jar log4j-1.2.17.jar jackson-datatype-jdk8-2.11.4.jar spring-boot-s
+ tarter-websocket-2.4.4.jar jakarta.activation-1.2.2.jar attoparser-2.0.
+ 5.RELEASE.jar jakarta.xml.ws-api-2.3.3.jar jakarta.activation-api-1.2.2
+ .jar spring-aop-5.3.5.jar spring-websocket-5.3.5.jar jakarta.el-3.0.3.j
+ ar stax-ex-1.8.3.jar spring-context-5.3.5.jar spring-boot-starter-thyme
+ leaf-2.4.4.jar jakarta.annotation-api-1.3.5.jar spring-xml-3.0.10.RELEA
+ SE.jar spring-jcl-5.3.5.jar jackson-datatype-jsr310-2.11.4.jar slf4j-ap
+ i-1.7.30.jar logback-core-1.2.3.jar unbescape-1.1.6.RELEASE.jar spring-
+ core-5.3.5.jar spring-boot-autoconfigure-2.4.4.jar log4j-to-slf4j-2.13.
+ 3.jar spring-beans-5.3.5.jar jackson-annotations-2.11.4.jar spring-mess
+ aging-5.3.5.jar saaj-impl-1.5.2.jar tomcat-embed-websocket-9.0.44.jar j
+ ackson-module-parameter-names-2.11.4.jar spring-boot-2.4.4.jar spring-o
+ xm-5.3.5.jar logback-classic-1.2.3.jar spring-boot-starter-logging-2.4.
+ 4.jar spring-boot-starter-web-services-2.4.4.jar thymeleaf-3.0.12.RELEA
+ SE.jar snakeyaml-1.27.jar spring-boot-starter-json-2.4.4.jar mina-core-
+ 2.0.14.jar spring-ws-core-3.0.10.RELEASE.jar jackson-databind-2.11.4.ja
+ r spring-web-5.3.5.jar tomcat-embed-core-9.0.44.jar spring-boot-starter
+ -tomcat-2.4.4.jar spring-boot-starter-web-2.4.4.jar jquery-3.5.1.jar th
+ ymeleaf-extras-java8time-3.0.4.RELEASE.jar spring-webmvc-5.3.5.jar jaka
+ rta.jws-api-2.1.0.jar spring-expression-5.3.5.jar jackson-core-2.11.4.j
+ ar spring-boot-starter-2.4.4.jar jul-to-slf4j-1.7.30.jar log4j-api-2.13
+ .3.jar jakarta.xml.soap-api-1.4.2.jar
 
